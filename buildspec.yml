@@ -9,12 +9,16 @@ phases:
       - pip install -r requirements.txt
   build:
     commands:
+      - echo Checking current directory:
+      - ls -la
+      - echo Contents of app.py:
+      - cat app.py
       - echo Running tests...
       - export PYTHONPATH=$PYTHONPATH:$(pwd)
-      - pytest --junitxml=reports/results.xml --tb=short
+      - pytest -v --junitxml=reports/results.xml
   post_build:
     commands:
-      - echo ✅ Tests finished. Build complete.
+      - echo ✅ Build phase completed.
 
 artifacts:
   files:
