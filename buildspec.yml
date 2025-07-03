@@ -7,6 +7,7 @@ phases:
     commands:
       - echo Installing dependencies...
       - pip install -r requirements.txt
+
   build:
     commands:
       - echo Checking current directory:
@@ -16,6 +17,7 @@ phases:
       - echo Running tests...
       - export PYTHONPATH=$PYTHONPATH:$(pwd)
       - pytest -v --junitxml=reports/results.xml
+
   post_build:
     commands:
       - echo ✅ Build phase completed.
@@ -28,5 +30,5 @@ artifacts:
 reports:
   pytest:
     files:
-      - "reports/results.xml"
+      - reports/results.xml
     discard-paths: yes
