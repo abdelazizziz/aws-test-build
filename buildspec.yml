@@ -5,13 +5,24 @@ phases:
     runtime-versions:
       python: 3.10
     commands:
-    - echo Installing dependencies...
-    - pip install -r requirements.txt
+      - echo Installing dependencies...
+      - pip install -r requirements.txt
   build:
     commands:
-    - echo Running tests...
-    - pytest --junitxml=reports/results.xml --tb=short
+      - echo Running tests...
+      - export PYTHONPATH=$PYTHONPATH:$(pwd)
+      - pytest --junitxml=reports/results.xml --tb=short
   post_build:
-      commands:
-        - echo Build completed successfully
-    
+    commands:
+      - echo ✅ Tests finished. Build complete.
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: .
+
+reports:
+  pytest:
+    files:
+      - "reports/results.xml"
+    discard-paths: yes
