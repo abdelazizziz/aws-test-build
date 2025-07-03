@@ -5,23 +5,15 @@ phases:
     runtime-versions:
       python: 3.10
     commands:
-      - echo Installing dependencies...
-      - pip install -r requirements.txt
-
+    - echo Installing dependencies...
+    - pip install -r requirements.txt
   build:
     commands:
-      - echo Checking current directory:
-      - ls -la
-      - echo Contents of app.py:
-      - cat app.py
-      - echo Running tests...
-      - export PYTHONPATH=$PYTHONPATH:$(pwd)
-      - pytest -v --junitxml=reports/results.xml
-
+    - echo Running tests...
+    - pytest --junitxml=reports/results.xml --tb=short
   post_build:
-    commands:
-      - echo ✅ Build phase completed.
-
+      commands:
+        - echo Build completed successfully
 artifacts:
   files:
     - '**/*'
@@ -30,5 +22,6 @@ artifacts:
 reports:
   pytest:
     files:
-      - reports/results.xml
+      - "reports/results.xml"  
     discard-paths: yes
+      
